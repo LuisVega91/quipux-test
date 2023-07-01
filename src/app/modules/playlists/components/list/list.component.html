@@ -1,0 +1,22 @@
+<nz-table #basicTable [nzData]="$any(playlists$ | async)">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>description</th>
+        <th>Location</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let playlist of playlists$ | async ">
+        <td>{{playlist.name}}</td>
+        <td>{{playlist.description}}</td>
+        <td>{{playlist.location}}</td>
+        <td>
+          <a (click)="editById(playlist.id)">Edit</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="deleteByName(playlist.name)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
