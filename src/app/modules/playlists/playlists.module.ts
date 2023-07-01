@@ -9,6 +9,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzTableModule,
     NzDividerModule,
     NzButtonModule,
-    NzIconModule
+    NzIconModule,
+    NzFormModule,
+    ReactiveFormsModule
   ]
 })
 export class PlaylistsModule { }

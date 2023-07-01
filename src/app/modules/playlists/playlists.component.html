@@ -1,8 +1,9 @@
 <header class="header">
-    <h1>Playlists</h1>
-    <button nz-button nzType="primary" [nzSize]="'large'" routerLink="/dashboard/playlists/form">
-        <span nz-icon nzType="plus"></span>
-        Add new
-      </button>
+  <h1>Playlists</h1>
+  <button nz-button nzType="primary" [nzSize]="'large'" routerLink="/dashboard/playlists/form"
+    *ngIf="canShowButton$ | async ">
+    <span nz-icon nzType="plus"></span>
+    Add new
+  </button>
 </header>
 <router-outlet></router-outlet>

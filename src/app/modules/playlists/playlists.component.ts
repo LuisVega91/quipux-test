@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Event, NavigationEnd, ResolveEnd, Router } from '@angular/router';
+import { Observable, filter, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-playlists',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class PlaylistsComponent {
 
+  canShowButton$: Observable<boolean> = this.router.events.pipe(
+    filter(resp => resp instanceof ResolveEnd),
+    map((event) => !(event as ResolveEnd).url?.includes('form'))
+  )
+
+  constructor(private router: Router) {
+
+  }
 }
