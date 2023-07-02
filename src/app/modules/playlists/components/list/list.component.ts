@@ -21,7 +21,6 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.playlists$ = this.playlistsService.getPlayLIsts();
-    this.playlistsService.setSelectedPlaylist( new PlaylistModel({}))
   }
 
   deleteByName(playlistName: string) {
@@ -31,9 +30,7 @@ export class ListComponent implements OnInit {
     })
   }
   editPlaylist(playlist: PlaylistModel) {
-    console.log({playlist})
-    this.playlistsService.setSelectedPlaylist(playlist);
-    this.router.navigate(['dashboard', 'playlists', 'form'])
+    this.router.navigate(['dashboard', 'playlists', 'form', playlist.name])
   }
 
 }

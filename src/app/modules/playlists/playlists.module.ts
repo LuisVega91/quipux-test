@@ -15,6 +15,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { SongsFormComponent } from './components/songs-form/songs-form.component';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 
 @NgModule({
@@ -36,7 +38,10 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzMessageModule,
     FormsModule,
     NzPopoverModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzPopconfirmModule,
+    NzFormModule,
+    NzInputModule,
   ]
 })
 export class PlaylistsModule { }

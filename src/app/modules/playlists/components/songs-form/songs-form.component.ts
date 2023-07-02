@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SongModel } from 'src/app/core/models/song.model';
+import { PlaylistsService } from '../../services/playlists.service';
+import { SongsService } from '../../services/songs.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-songs-form',
@@ -9,43 +13,62 @@ import { SongModel } from 'src/app/core/models/song.model';
 export class SongsFormComponent implements OnInit {
 
   @Input() songs: SongModel[] = [];
-  editCache: { [key: string]: { edit: boolean; data: SongModel } } = {};
+  @Input() playlistId: number = 0;
 
-  startEdit(id: number): void {
-    this.editCache[id].edit = true;
+  songForm!: FormGroup<{
+    title: FormControl<string>;
+    artist: FormControl<string>;
+    album: FormControl<string>;
+    year: FormControl<string>;
+    genre: FormControl<string>;
+  }>;
+  canLoadFrom: boolean = false;
+  isFormDisabled: boolean = false;
+  newSong: SongModel = new SongModel({});
+
+  deleteSong(songId: number) {
+    this.songsService.deleteSong(songId).subscribe(() => {
+      this.songs = this.songs.filter(song => song.id != songId)
+    })
   }
 
-  cancelEdit(id: number): void {
-    const index = this.songs.findIndex(song => song.id === id);
-    this.editCache[id] = {
-      data: { ...this.songs[index] },
-      edit: false
-    };
+  save() {
+    const newSong = new SongModel({...this.songForm.value, playlistId: this.playlistId})
+    this.songsService.createSong(newSong).subscribe((song) => {
+      this.message.success('Song created Successfully ')
+      this.songs = [
+        song,
+        ...this.songs
+      ]
+    })
   }
 
-  saveEdit(id: number): void {
-    const index = this.songs.findIndex(item => item.id === id);
-    Object.assign(this.songs[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
-  }
-
-  updateEditCache(): void {
-    this.songs.forEach(song => {
-      this.editCache[song.id] = {
-        edit: false,
-        data: { ...song }
-      };
+  formInit() {
+    this.songForm = this.fb.group({
+      title: new FormControl<string>(this.newSong.title, { validators: [Validators.required], nonNullable: true }),
+      artist: new FormControl<string>(this.newSong.artist, { validators: [Validators.required], nonNullable: true }),
+      album: new FormControl<string>(this.newSong.album, { validators: [Validators.required], nonNullable: true }),
+      year: new FormControl<string>(this.newSong.year, { validators: [Validators.required], nonNullable: true }),
+      genre: new FormControl<string>(this.newSong.genre, { validators: [Validators.required], nonNullable: true }),      
     });
+    this.canLoadFrom = true;
+    this.isFormDisabled = !!this.newSong.id;
+    if(this.isFormDisabled){
+      this.songForm.disable();
+    }
   }
 
-  ngOnInit(): void {
-    this.updateEditCache();
+
+  constructor(
+    private songsService: SongsService,
+    private message: NzMessageService,
+    private fb: FormBuilder,
+  ) {
+
   }
 
-  addNewSong() {
-    console.log({size_prev: this.songs.length});
-    this.songs = this.songs.concat([new SongModel({})]);
-    console.log({size_post: this.songs.length});
-    this.updateEditCache()
+  ngOnInit() {
+    this.formInit();
   }
+
 }

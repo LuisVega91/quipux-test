@@ -1,6 +1,7 @@
 {
     "material-icon-theme.activeIconPack": "angular",
     "cSpell.words": [
-        "antd"
+        "antd",
+        "Popconfirm"
     ]
 }

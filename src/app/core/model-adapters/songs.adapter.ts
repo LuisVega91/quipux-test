@@ -10,7 +10,7 @@ export interface SongResponse {
 }
 
 
-export const songAdapter = (song: SongResponse): Song => {
+export const songAdapter = (song: SongResponse, playlistId: number): Song => {
     return {
         id: song.id,
         title: song.titulo,
@@ -18,5 +18,6 @@ export const songAdapter = (song: SongResponse): Song => {
         album: song.album,
         year: song.anno,
         genre: song.genero,
+        playlistId: playlistId
     }
 }

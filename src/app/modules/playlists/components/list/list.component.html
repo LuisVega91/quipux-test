@@ -1,4 +1,4 @@
-<nz-table [nzData]="$any(playlists$ | async )" [nzScroll]="{ x: '1050px', y: '400px'}">
+<nz-table [nzFrontPagination]="false" [nzData]="$any(playlists$ | async )" [nzScroll]="{ x: '1050px', y: '400px'}">
   <thead>
     <tr>
       <th>Name</th>

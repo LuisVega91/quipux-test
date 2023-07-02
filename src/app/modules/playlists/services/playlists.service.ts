@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, filter, map, tap } from 'rxjs';
-import { Playlist, PlaylistBackendCollectionType, PlaylistBackendType, PlaylistForCreationType, PlaylistModel } from 'src/app/core/models/playlist.model';
+import { Playlist, PlaylistBackendCollectionType, PlaylistBackendType, PlaylistBackendPostType, PlaylistModel } from 'src/app/core/models/playlist.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
 export class PlaylistsService {
 
   private playlistUrl = `${environment.baseUrl}/lists`
-  private selectedPlaylist: PlaylistModel = new PlaylistModel({});
 
   constructor(private http: HttpClient) {
 
@@ -22,19 +21,10 @@ export class PlaylistsService {
     );
   }
 
-  getPlaylistById(id: number) {
-    return this.http.get<PlaylistBackendCollectionType>(`${this.playlistUrl}/`).pipe<PlaylistModel[], PlaylistModel | undefined>(
-      map((playlistsResponse) => PlaylistModel.fromBackendTypeCollection(playlistsResponse)),
-      map((playlistsResponse) => playlistsResponse.find(playlist => playlist.id === id))
+  getPlaylistByName(playlistName: string): Observable<PlaylistModel> {
+    return this.http.get<PlaylistBackendType>(`${this.playlistUrl}/${playlistName}`).pipe<PlaylistModel>(
+      map((playlistsResponse) => PlaylistModel.fromBackendType(playlistsResponse))
     );
-  }
-
-  setSelectedPlaylist(playlist: PlaylistModel) {
-    this.selectedPlaylist = playlist;
-  }
-
-  getSelectedPlaylist(): PlaylistModel{
-    return this.selectedPlaylist;
   }
 
   deleteByName(playlistName: string) {
@@ -42,8 +32,10 @@ export class PlaylistsService {
   }
 
   savePlaylist(playlist: PlaylistModel): Observable<PlaylistModel> {
-    const body: PlaylistForCreationType = playlist.toBakedTypeForPost();
+    const body: PlaylistBackendPostType = playlist.toBakedPostType();
     return this.http.post<PlaylistBackendType>(`${this.playlistUrl}/`, body)
       .pipe(map(response => PlaylistModel.fromBackendType(response)))
   }
+
+  
 }

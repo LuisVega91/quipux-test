@@ -1,23 +1,17 @@
-import { SongResponse as SongFromBackend, songAdapter } from "../model-adapters/songs.adapter";
-import { Song, SongModel } from "./song.model";
 
-export type PlaylistForCreationType = {
+import { Song, SongBackendType, SongModel } from "./song.model";
+
+export type PlaylistBackendPostType = {
     nombre: string,
     descripcion: string,
-    canciones: {
-        titulo: string,
-        artista: string,
-        album: string,
-        anno: string,
-        genero: string
-    }[]
+    canciones: Omit<SongBackendType, 'id'>[]
 }
 
 export type PlaylistBackendType = {
     id: number;
     nombreLista: string;
     descripcion: string;
-    songs: any;
+    songs: SongBackendType[];
     location: string;
 }
 
@@ -53,18 +47,18 @@ export class PlaylistModel implements Playlist {
         return playlistBackendCollection.listas.map(this.fromBackendType)
     }
     
-    static fromBackendType(playlistBackendType: PlaylistBackendType){
+    static fromBackendType(playlistBackendType: PlaylistBackendType): PlaylistModel{
         const playlist: Playlist = {
             id: playlistBackendType.id,
             name: playlistBackendType.nombreLista,
             description: playlistBackendType.descripcion,
-            songs: playlistBackendType.songs.map((song: SongFromBackend) => songAdapter(song)),
+            songs: playlistBackendType.songs.map((song: SongBackendType) => SongModel.fromBackendType(song, playlistBackendType.id)),
             location: playlistBackendType.location
         }
         return new PlaylistModel(playlist);
     }
 
-    toBakedTypeForPost(): PlaylistForCreationType {
+    toBakedPostType(): PlaylistBackendPostType {
         return {
             nombre: this.name,
             descripcion: this.description,

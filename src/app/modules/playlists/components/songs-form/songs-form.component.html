@@ -1,4 +1,62 @@
-<nz-table #editRowTable nzBordered [nzData]="songs" nzTableLayout="fixed" [nzScroll]="{ x: '1150px', y: '240px' }">
+<div *ngIf="canLoadFrom">
+  <form nz-form [formGroup]="songForm" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+
+      <div nz-col [nzSpan]="4">
+        <nz-form-item>
+          <nz-form-label>title</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="title" formControlName="title" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="4">
+        <nz-form-item>
+          <nz-form-label>artist</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="artist" formControlName="artist" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="4">
+        <nz-form-item>
+          <nz-form-label>album</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="album" formControlName="album" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="4">
+        <nz-form-item>
+          <nz-form-label>year</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="year" formControlName="year" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="4">
+        <nz-form-item>
+          <nz-form-label>genre</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="genre" formControlName="genre" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="4">
+        <div class="container-button">
+          <button nz-button nzType="primary" [nzSize]="'large'" (click)="save()" [disabled]="songForm.invalid">
+            <span nz-icon nzType="save"></span>
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+</div>
+
+<nz-table [nzFrontPagination]="false" #editRowTable nzBordered [nzData]="songs" nzTableLayout="fixed" [nzScroll]="{ x: '1150px', y: '240px' }">
   <thead>
     <tr>
       <th>Title</th>
@@ -10,30 +68,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let song of editRowTable.data">
-      <ng-container *ngIf="!editCache[song.id].edit; else editTemplate">
+    <tr *ngFor="let song of songs; let index = index">
+      <ng-container>
         <td>{{ song.title }}</td>
         <td>{{ song.artist }}</td>
         <td>{{ song.album }}</td>
         <td>{{ song.year }}</td>
         <td>{{ song.genre }}</td>
-        <td><a (click)="startEdit(song.id)">Edit</a></td>
+        <td><a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteSong(song.id)">Delete</a></td>
       </ng-container>
-      <ng-template #editTemplate>
-        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.title" /></td>
-        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.artist" /></td>
-        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.album" /></td>
-        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.year" /></td>
-        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.genre" /></td>
-        <td>
-          <a (click)="saveEdit(song.id)" class="save">Save</a>
-          <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(song.id)">Cancel</a>
-        </td>
-      </ng-template>
     </tr>
   </tbody>
 </nz-table>
-<button nz-button nzType="primary" [nzSize]="'large'" (click)="addNewSong()">
-  <span nz-icon nzType="plus"></span>
-  Add new
-</button>
