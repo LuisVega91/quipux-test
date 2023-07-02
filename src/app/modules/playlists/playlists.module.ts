@@ -10,16 +10,19 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzMessageModule } from 'ng-zorro-antd/message';
-
+import { SongsFormComponent } from './components/songs-form/songs-form.component';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 
 @NgModule({
   declarations: [
     PlaylistsComponent,
     ListComponent,
-    FormComponent
+    FormComponent,
+    SongsFormComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,10 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzIconModule,
     NzFormModule,
     ReactiveFormsModule,
-    NzMessageModule
+    NzMessageModule,
+    FormsModule,
+    NzPopoverModule,
+    NzTypographyModule
   ]
 })
 export class PlaylistsModule { }

@@ -4,15 +4,15 @@
             <nz-form-item>
                 <nz-form-label>Name</nz-form-label>
                 <nz-form-control>
-                    <input nz-input placeholder="name" formControlName="name" />
+                    <input nz-input placeholder="name" formControlName="name" [disabled]="!isEditable" />
                 </nz-form-control>
             </nz-form-item>
         </div>
         <div nz-col [nzSpan]="12">
             <nz-form-item>
                 <nz-form-label>Description</nz-form-label>
-                <nz-form-control>
-                    <input nz-input placeholder="description" formControlName="description" />
+                <nz-form-control >
+                    <input nz-input placeholder="description" formControlName="description" [disabled]="!isEditable" />
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -25,4 +25,9 @@
         </button>
     </div>
 </form>
-<div class="search-result-list">Search Result List</div>
+<ng-container *ngIf="!isEditable">
+    <h1 nz-typography>Songs</h1>
+    <div class="search-result-list">
+        <app-songs-form [songs]="playlist.songs"></app-songs-form>
+    </div>
+</ng-container>

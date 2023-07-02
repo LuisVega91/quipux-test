@@ -15,12 +15,12 @@ export class SongModel implements Song {
     year: string;
     genre: string;
 
-    constructor(song: Song) {
-        this.id = song.id;
-        this.title = song.title;
-        this.artist = song.artist;
-        this.album = song.album;
-        this.year = song.year;
-        this.genre = song.genre;
+    constructor(song: Partial<Song>) {
+        this.id = song.id ?? 0;
+        this.title = song.title ?? '';
+        this.artist = song.artist ?? '';
+        this.album = song.album ?? '';
+        this.year = song.year ?? '';
+        this.genre = song.genre ?? '';
     }
 }

@@ -21,6 +21,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.playlists$ = this.playlistsService.getPlayLIsts();
+    this.playlistsService.setSelectedPlaylist( new PlaylistModel({}))
   }
 
   deleteByName(playlistName: string) {

@@ -1,0 +1,39 @@
+<nz-table #editRowTable nzBordered [nzData]="songs" nzTableLayout="fixed" [nzScroll]="{ x: '1150px', y: '240px' }">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Year</th>
+      <th>Genre</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let song of editRowTable.data">
+      <ng-container *ngIf="!editCache[song.id].edit; else editTemplate">
+        <td>{{ song.title }}</td>
+        <td>{{ song.artist }}</td>
+        <td>{{ song.album }}</td>
+        <td>{{ song.year }}</td>
+        <td>{{ song.genre }}</td>
+        <td><a (click)="startEdit(song.id)">Edit</a></td>
+      </ng-container>
+      <ng-template #editTemplate>
+        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.title" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.artist" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.album" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.year" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[song.id].data.genre" /></td>
+        <td>
+          <a (click)="saveEdit(song.id)" class="save">Save</a>
+          <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(song.id)">Cancel</a>
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</nz-table>
+<button nz-button nzType="primary" [nzSize]="'large'" (click)="addNewSong()">
+  <span nz-icon nzType="plus"></span>
+  Add new
+</button>

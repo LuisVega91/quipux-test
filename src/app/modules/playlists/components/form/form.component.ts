@@ -48,12 +48,16 @@ export class FormComponent implements OnInit {
   }
 
   save() {
-    const id = this.message.loading('Saving in progress..', { nzDuration: 0 }).messageId;
+    const id = this.message.loading('Saving in progress..', { nzDuration: 250 }).messageId;
     const playlistModel = new PlaylistModel(this.playlistForm.value);
-    this.playlistsService.savePlaylist(playlistModel).subscribe(() => {
+    this.playlistsService.savePlaylist(playlistModel).subscribe((playlist) => {
+      this.playlist = playlist;
+      this.formInit();
       this.message.remove(id);
-      this.message.success(`Playlist Saved Successfully`);
-      this.router.navigate(['dashboard', 'playlists', 'list']);
+      this.message.success(`Playlist Saved Successfully`).onClose.subscribe(()=>{
+        this.message.info('Now you can add new songs')
+      });
+      // this.router.navigate(['dashboard', 'playlists', 'list']);
     })
   }
 }

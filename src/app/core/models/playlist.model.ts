@@ -1,5 +1,5 @@
 import { SongResponse as SongFromBackend, songAdapter } from "../model-adapters/songs.adapter";
-import { Song } from "./song.model";
+import { Song, SongModel } from "./song.model";
 
 export type PlaylistForCreationType = {
     nombre: string,
@@ -38,14 +38,14 @@ export class PlaylistModel implements Playlist {
     id: number;
     name: string;
     description: string;
-    songs: Song[];
+    songs: SongModel[];
     location: string;
 
     constructor(playlist: Partial<Playlist>) {
         this.id = playlist.id ?? 0;
         this.name = playlist.name ?? '';
         this.description = playlist.description ?? '';
-        this.songs = playlist.songs ?? [];
+        this.songs = playlist.songs?.map(song => new SongModel(song)) ?? [];
         this.location = playlist.location ?? '';
     }
 
