@@ -1,20 +1,25 @@
-<nz-table #basicTable [nzData]="$any(playlists$ | async)">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>description</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let playlist of playlists$ | async ">
-        <td>{{playlist.name}}</td>
-        <td>{{playlist.description}}</td>
-        <td>
-          <a (click)="editById(playlist.id)">Edit</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="deleteByName(playlist.name)">Delete</a>
-        </td>
-      </tr>
-    </tbody>
-  </nz-table>
+<nz-table [nzData]="$any(playlists$ | async )" [nzFrontPagination]="false" [nzScroll]="{ x: '1150px', y: '' }">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let playlist of playlists$ | async ">
+      <td>{{playlist.name}}</td>
+      <td>{{playlist.description}}</td>
+      <td>
+        <a (click)="editPlaylist(playlist)">Edit</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="deleteByName(playlist.name)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<button nz-button nzType="primary" [nzSize]="'large'" routerLink="/dashboard/playlists/form">
+  <span nz-icon nzType="plus"></span>
+  Add new
+</button>

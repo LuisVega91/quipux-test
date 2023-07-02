@@ -16,11 +16,11 @@ export class SingInComponent implements OnInit {
     password: FormControl<string>;
   }>;
 
-  submitForm(): void {
+  singIn(): void {
     if (this.singInForm.valid) {
       this.authService.singIn(this.singInForm.value as Credentials).subscribe((response) => {
         this.sessionService.setCurrentSession(response)
-        this.router.navigate(['dashboard', 'playlists'])
+        this.router.navigate(['dashboard', 'playlists', 'list'])
       })
     } else {
       Object.values(this.singInForm.controls).forEach(control => {

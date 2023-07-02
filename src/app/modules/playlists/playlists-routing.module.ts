@@ -10,6 +10,10 @@ const routes: Routes = [
     component: PlaylistsComponent,
     children: [
       {
+        path: '',
+        component: ListComponent
+      },
+      {
         path: 'list',
         component: ListComponent
       },

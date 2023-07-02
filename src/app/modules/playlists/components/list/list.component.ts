@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlaylistsService } from '../../services/playlists.service';
 import { Observable } from 'rxjs';
 import { PlaylistModel } from 'src/app/core/models/playlist.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -12,8 +13,10 @@ export class ListComponent implements OnInit {
 
   playlists$!: Observable<PlaylistModel[]>;
 
-  constructor(private playlistsService: PlaylistsService) {
-
+  constructor(
+    private playlistsService: PlaylistsService,
+    private router: Router,
+  ) {
   }
 
   ngOnInit(): void {
@@ -26,8 +29,10 @@ export class ListComponent implements OnInit {
       this.playlists$ = this.playlistsService.getPlayLIsts()
     })
   }
-  editById(playlistId: number) {
-    this.playlistsService.editById(playlistId)
+  editPlaylist(playlist: PlaylistModel) {
+    console.log({playlist})
+    this.playlistsService.setSelectedPlaylist(playlist);
+    this.router.navigate(['dashboard', 'playlists', 'form'])
   }
 
 }

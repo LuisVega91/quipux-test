@@ -41,12 +41,12 @@ export class PlaylistModel implements Playlist {
     songs: Song[];
     location: string;
 
-    constructor(playlist: Playlist) {
-        this.id = playlist.id;
-        this.name = playlist.name;
-        this.description = playlist.description;
-        this.songs = playlist.songs;
-        this.location = playlist.location;
+    constructor(playlist: Partial<Playlist>) {
+        this.id = playlist.id ?? 0;
+        this.name = playlist.name ?? '';
+        this.description = playlist.description ?? '';
+        this.songs = playlist.songs ?? [];
+        this.location = playlist.location ?? '';
     }
 
     static fromBackendTypeCollection(playlistBackendCollection: PlaylistBackendCollectionType): PlaylistModel[] {

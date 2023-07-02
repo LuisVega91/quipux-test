@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { PlaylistsService } from '../../services/playlists.service';
+import { PlaylistModel } from 'src/app/core/models/playlist.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -9,28 +11,49 @@ import { PlaylistsService } from '../../services/playlists.service';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  validateForm!: FormGroup;
+  playlistForm!: FormGroup<{
+    name: FormControl<string>;
+    description: FormControl<string>;
+    // songs: FormControl<string>;
+  }>;
   controlArray: Array<{ index: number; show: boolean }> = [];
   isCollapse = true;
+  playlist: PlaylistModel = new PlaylistModel({});
+  isEditable: boolean = false;
 
-  resetForm(): void {
-    this.validateForm.reset();
-  }
 
   constructor(
-    private fb: UntypedFormBuilder,
-    private playlistsService: PlaylistsService
+    private fb: FormBuilder,
+    private playlistsService: PlaylistsService,
+    private router: Router,
+    private message: NzMessageService,
   ) { }
 
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      name: new FormControl<string>('', { validators: [Validators.required] }),
-      description: new FormControl<string>('', { validators: [Validators.required] }),
-      songs: new FormControl<string>('', { validators: [Validators.required] }),
+  formInit() {
+    this.playlistForm = this.fb.group({
+      name: new FormControl<string>(this.playlist.name, { validators: [Validators.required], nonNullable: true }),
+      description: new FormControl<string>(this.playlist.description, { validators: [Validators.required], nonNullable: true }),
+      // songs: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
     });
+    this.isEditable = !this.playlist.id;
+  }
+
+  getSelectedPlaylist(){
+    this.playlist = this.playlistsService.getSelectedPlaylist()
+  }
+
+  ngOnInit(): void {
+    this.getSelectedPlaylist();
+    this.formInit();
   }
 
   save() {
-    // this.playlistsService
+    const id = this.message.loading('Saving in progress..', { nzDuration: 0 }).messageId;
+    const playlistModel = new PlaylistModel(this.playlistForm.value);
+    this.playlistsService.savePlaylist(playlistModel).subscribe(() => {
+      this.message.remove(id);
+      this.message.success(`Playlist Saved Successfully`);
+      this.router.navigate(['dashboard', 'playlists', 'list']);
+    })
   }
 }

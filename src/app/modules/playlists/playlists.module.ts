@@ -11,6 +11,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NzButtonModule,
     NzIconModule,
     NzFormModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzMessageModule
   ]
 })
 export class PlaylistsModule { }

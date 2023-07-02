@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class PlaylistsService {
 
   private playlistUrl = `${environment.baseUrl}/lists`
+  private selectedPlaylist: PlaylistModel = new PlaylistModel({});
 
   constructor(private http: HttpClient) {
 
@@ -28,15 +29,19 @@ export class PlaylistsService {
     );
   }
 
-  editById(playlistId: number) {
+  setSelectedPlaylist(playlist: PlaylistModel) {
+    this.selectedPlaylist = playlist;
+  }
 
+  getSelectedPlaylist(): PlaylistModel{
+    return this.selectedPlaylist;
   }
 
   deleteByName(playlistName: string) {
     return this.http.delete(`${this.playlistUrl}/${playlistName}`,)
   }
 
-  createPlaylist(playlist: PlaylistModel): Observable<PlaylistModel> {
+  savePlaylist(playlist: PlaylistModel): Observable<PlaylistModel> {
     const body: PlaylistForCreationType = playlist.toBakedTypeForPost();
     return this.http.post<PlaylistBackendType>(`${this.playlistUrl}/`, body)
       .pipe(map(response => PlaylistModel.fromBackendType(response)))
