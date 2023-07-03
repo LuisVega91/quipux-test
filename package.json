@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng build --configuration=production --base-href 'https://LuisVega91.github.io/quipux-test/' && ngh --dir dist/test-quipux"
   },
   "private": true,
   "dependencies": {
