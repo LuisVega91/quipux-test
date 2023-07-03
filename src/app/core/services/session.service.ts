@@ -18,7 +18,7 @@ export class SessionService {
   }
 
   gerCurrentSession(): Observable<AuthTokenModel> {
-    if (!this.currentSession.token) {
+    if (!this.currentSession.hasToken) {
       this.router.navigate(['/'])
     }
     return this.currentSession$.asObservable();

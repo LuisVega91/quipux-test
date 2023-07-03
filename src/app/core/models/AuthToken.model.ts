@@ -4,8 +4,17 @@ export interface AuthToken {
 }
 
 export class AuthTokenModel {
-    token: string = '';
-    expirationDate: Date = new Date();
+    token: string;
+    expirationDate: Date;
+
+    get isTokenExpiated(): boolean {
+        const today = new Date();
+        return today > this.expirationDate;
+    }
+
+    get hasToken(): boolean {
+        return !!this.token;
+    }
 
     constructor(singInResponse: Partial<AuthToken>) {
         this.token = singInResponse.token ?? '';

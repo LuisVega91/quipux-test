@@ -46,21 +46,6 @@ export class SongModel implements Song {
         this.playlistId = song.playlistId ?? 0;
     }
 
-    get isValid() {
-        if (!this.title) { return false }
-        if (!this.artist) { return false }
-        if (!this.album) { return false }
-        if (!this.year) { return false }
-        if (!this.genre) { return false }
-        if (!this.playlistId) { return false }
-
-        return true;
-    }
-
-    get isInvalid(){
-        return !this.isValid
-    }
-
     static fromBackendType(song: SongBackendType, playlistId: number): Song {
         return {
             id: song.id,

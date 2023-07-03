@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canActivate: [AuthenticatedGuard],
     loadChildren: () => import('./modules/layout/layout.module').then(m => m.LayoutModule)
   }
 ];

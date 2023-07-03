@@ -17,7 +17,6 @@ export class JsonWebTokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     const token = this.sessionService.currentSession.token;
-    if (!token) { this.router.navigate(['']) }
     const authenticatedRequest = request.clone({
       headers: request.headers.set('Authorization', `Bearer ${token}`)
     });

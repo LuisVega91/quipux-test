@@ -26,7 +26,6 @@ export class ListComponent implements OnInit {
   }
 
   deleteByName(playlistName: string) {
-    console.log({playlistName})
     this.playlistsService.deleteByName(playlistName).subscribe((_) => {
       this.playlists$ = this.playlistsService.getPlayLIsts()
       this.message.success('Playlist Successfully deleted')
