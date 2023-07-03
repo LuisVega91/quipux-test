@@ -1,48 +1,48 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { SessionData, SessionDataModel } from '../models/user.model';
-import { LOCAL_STORAGE_SESSION_KEY } from '../constants/session';
+import { LOCAL_STORAGE_SESSION_KEY } from '../constants/constansts';
 import { Router } from '@angular/router';
+import { AuthToken, AuthTokenModel } from '../models/AuthToken.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  currentSession: SessionDataModel = new SessionDataModel({});
-  private currentSession$: BehaviorSubject<SessionDataModel> = new BehaviorSubject(this.currentSession)
+  currentSession: AuthTokenModel = new AuthTokenModel({});
+  private currentSession$: BehaviorSubject<AuthTokenModel> = new BehaviorSubject(this.currentSession)
 
   constructor(private router: Router) {
     const sessionInLocalStorage = this.getSessionFromLocalStorage()
     this.setCurrentSession(sessionInLocalStorage)
   }
 
-  gerCurrentSession(): Observable<SessionDataModel> {
+  gerCurrentSession(): Observable<AuthTokenModel> {
     if (!this.currentSession.token) {
       this.router.navigate(['/'])
     }
     return this.currentSession$.asObservable();
   }
 
-  setCurrentSession(newSession: SessionData) {
-    this.currentSession = new SessionDataModel(newSession)
+  setCurrentSession(newSession: AuthToken) {
+    this.currentSession = new AuthTokenModel(newSession)
     this.setSessionToLocalStorage(newSession)
     this.currentSession$.next(this.currentSession)
   }
   
   cleanCurrentSession(){
     this.setSessionToLocalStorage({})
-    this.currentSession = new SessionDataModel({})
+    this.currentSession = new AuthTokenModel({})
     this.currentSession$.next(this.currentSession);
   }
 
-  private getSessionFromLocalStorage(): SessionData {
+  private getSessionFromLocalStorage(): AuthToken {
     return JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_SESSION_KEY) ?? '{}'
     )
   }
 
-  private setSessionToLocalStorage(newSession: Partial<SessionData>) {
+  private setSessionToLocalStorage(newSession: Partial<AuthToken>) {
     localStorage.setItem(LOCAL_STORAGE_SESSION_KEY,
       JSON.stringify(newSession)
     )

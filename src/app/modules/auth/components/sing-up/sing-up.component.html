@@ -1,1 +1,41 @@
-<p>sing-up works!</p>
+<ng-container *ngIf="canShowForm">
+    <form nz-form [formGroup]="singUpForm" class="form" (ngSubmit)="singUp()" >
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your email!">
+                <nz-input-group nzPrefixIcon="user">
+                    <input type="text" nz-input formControlName="email" placeholder="Username" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" nz-input formControlName="password" placeholder="Password" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Photo URL!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="text" nz-input formControlName="photo" placeholder="Photo" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Firs Name!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="text" nz-input formControlName="firstName" placeholder="Firs Name" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Last Name!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="text" nz-input formControlName="lastName" placeholder="Last Name" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <button nz-button class="form__button" [nzType]="'primary'">Sing Up / Sing In</button>
+    </form>
+</ng-container>

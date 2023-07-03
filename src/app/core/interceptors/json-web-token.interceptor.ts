@@ -5,12 +5,12 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable, lastValueFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SessionService } from '../services/session.service';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class SessionInterceptor implements HttpInterceptor {
+export class JsonWebTokenInterceptor implements HttpInterceptor {
 
   constructor(private sessionService: SessionService, private router: Router) { }
 

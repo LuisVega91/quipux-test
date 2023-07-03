@@ -1,3 +1,10 @@
+<div class="container-button">
+  <button nz-button nzType="primary" [nzSize]="'large'" routerLink="/dashboard/playlists/form">
+    <span nz-icon nzType="plus"></span>
+    Add new
+  </button>
+</div>
+
 <nz-table [nzFrontPagination]="false" [nzData]="$any(playlists$ | async )" [nzScroll]="{ x: '1050px', y: '400px'}">
   <thead>
     <tr>
@@ -13,13 +20,8 @@
       <td>
         <a (click)="editPlaylist(playlist)">Edit</a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a (click)="deleteByName(playlist.name)">Delete</a>
+        <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteByName(playlist.name)">Delete</a>
       </td>
     </tr>
   </tbody>
 </nz-table>
-
-<button nz-button nzType="primary" [nzSize]="'large'" routerLink="/dashboard/playlists/form">
-  <span nz-icon nzType="plus"></span>
-  Add new
-</button>

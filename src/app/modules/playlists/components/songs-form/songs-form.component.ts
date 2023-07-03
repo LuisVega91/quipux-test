@@ -4,6 +4,7 @@ import { PlaylistsService } from '../../services/playlists.service';
 import { SongsService } from '../../services/songs.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { YEAR_PATTERN } from 'src/app/core/constants/patterns';
 
 @Component({
   selector: 'app-songs-form',
@@ -45,10 +46,10 @@ export class SongsFormComponent implements OnInit {
 
   formInit() {
     this.songForm = this.fb.group({
-      title: new FormControl<string>(this.newSong.title, { validators: [Validators.required], nonNullable: true }),
+      title: new FormControl<string>(this.newSong.title, { validators: [Validators.required, Validators.minLength(3)], nonNullable: true }),
       artist: new FormControl<string>(this.newSong.artist, { validators: [Validators.required], nonNullable: true }),
       album: new FormControl<string>(this.newSong.album, { validators: [Validators.required], nonNullable: true }),
-      year: new FormControl<string>(this.newSong.year, { validators: [Validators.required], nonNullable: true }),
+      year: new FormControl<string>(this.newSong.year, { validators: [Validators.required, Validators.pattern(YEAR_PATTERN)], nonNullable: true }),
       genre: new FormControl<string>(this.newSong.genre, { validators: [Validators.required], nonNullable: true }),      
     });
     this.canLoadFrom = true;

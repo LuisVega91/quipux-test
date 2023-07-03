@@ -10,7 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { es_ES } from 'ng-zorro-antd/i18n';
 import { IconsProviderModule } from './icons-provider.module';
-import { SessionInterceptor } from './core/interceptors/session.interceptor';
+import { JsonWebTokenInterceptor } from './core/interceptors/json-web-token.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(es);
 
@@ -24,11 +26,14 @@ registerLocaleData(es);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    IconsProviderModule
+    IconsProviderModule,
+    NzMessageModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: es_ES },
-    { provide: HTTP_INTERCEPTORS, useClass: SessionInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JsonWebTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })

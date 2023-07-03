@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, filter, map, tap } from 'rxjs';
-import { Playlist, PlaylistBackendCollectionType, PlaylistBackendType, PlaylistBackendPostType, PlaylistModel } from 'src/app/core/models/playlist.model';
+import { Playlist, PlaylistGetResponseType, PlaylistPostResponseType, PlaylistPostRequestType, PlaylistModel } from 'src/app/core/models/playlist.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,14 +16,14 @@ export class PlaylistsService {
   }
 
   getPlayLIsts(): Observable<PlaylistModel[]> {
-    return this.http.get<PlaylistBackendCollectionType>(`${this.playlistUrl}/`).pipe<PlaylistModel[]>(
-      map((playlistsResponse) => PlaylistModel.fromBackendTypeCollection(playlistsResponse))
+    return this.http.get<PlaylistGetResponseType>(`${this.playlistUrl}/`).pipe<PlaylistModel[]>(
+      map((playlistsResponse) => PlaylistModel.fromPlaylistGetResponseType(playlistsResponse))
     );
   }
 
   getPlaylistByName(playlistName: string): Observable<PlaylistModel> {
-    return this.http.get<PlaylistBackendType>(`${this.playlistUrl}/${playlistName}`).pipe<PlaylistModel>(
-      map((playlistsResponse) => PlaylistModel.fromBackendType(playlistsResponse))
+    return this.http.get<PlaylistPostResponseType>(`${this.playlistUrl}/${playlistName}`).pipe<PlaylistModel>(
+      map((playlistsResponse) => PlaylistModel.fromPlaylistPostResponseType(playlistsResponse))
     );
   }
 
@@ -32,9 +32,9 @@ export class PlaylistsService {
   }
 
   savePlaylist(playlist: PlaylistModel): Observable<PlaylistModel> {
-    const body: PlaylistBackendPostType = playlist.toBakedPostType();
-    return this.http.post<PlaylistBackendType>(`${this.playlistUrl}/`, body)
-      .pipe(map(response => PlaylistModel.fromBackendType(response)))
+    const body: PlaylistPostRequestType = playlist.toPostRequestType();
+    return this.http.post<PlaylistPostResponseType>(`${this.playlistUrl}/`, body)
+      .pipe(map(response => PlaylistModel.fromPlaylistPostResponseType(response)))
   }
 
   

@@ -3,6 +3,7 @@ import { PlaylistsService } from '../../services/playlists.service';
 import { Observable } from 'rxjs';
 import { PlaylistModel } from 'src/app/core/models/playlist.model';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-list',
@@ -16,6 +17,7 @@ export class ListComponent implements OnInit {
   constructor(
     private playlistsService: PlaylistsService,
     private router: Router,
+    private message: NzMessageService,
   ) {
   }
 
@@ -27,6 +29,7 @@ export class ListComponent implements OnInit {
     console.log({playlistName})
     this.playlistsService.deleteByName(playlistName).subscribe((_) => {
       this.playlists$ = this.playlistsService.getPlayLIsts()
+      this.message.success('Playlist Successfully deleted')
     })
   }
   editPlaylist(playlist: PlaylistModel) {

@@ -1,13 +1,13 @@
 
 import { Song, SongBackendType, SongModel } from "./song.model";
 
-export type PlaylistBackendPostType = {
+export type PlaylistPostRequestType = {
     nombre: string,
     descripcion: string,
     canciones: Omit<SongBackendType, 'id'>[]
 }
 
-export type PlaylistBackendType = {
+export type PlaylistPostResponseType = {
     id: number;
     nombreLista: string;
     descripcion: string;
@@ -16,8 +16,8 @@ export type PlaylistBackendType = {
 }
 
 
-export type PlaylistBackendCollectionType = {
-    listas: PlaylistBackendType[]
+export type PlaylistGetResponseType = {
+    listas: PlaylistPostResponseType[]
 }
 
 export interface Playlist {
@@ -43,22 +43,22 @@ export class PlaylistModel implements Playlist {
         this.location = playlist.location ?? '';
     }
 
-    static fromBackendTypeCollection(playlistBackendCollection: PlaylistBackendCollectionType): PlaylistModel[] {
-        return playlistBackendCollection.listas.map(this.fromBackendType)
+    static fromPlaylistGetResponseType(playlistGetResponseType: PlaylistGetResponseType): PlaylistModel[] {
+        return playlistGetResponseType.listas.map(this.fromPlaylistPostResponseType)
     }
     
-    static fromBackendType(playlistBackendType: PlaylistBackendType): PlaylistModel{
+    static fromPlaylistPostResponseType(playlistPostResponseType: PlaylistPostResponseType): PlaylistModel{
         const playlist: Playlist = {
-            id: playlistBackendType.id,
-            name: playlistBackendType.nombreLista,
-            description: playlistBackendType.descripcion,
-            songs: playlistBackendType.songs.map((song: SongBackendType) => SongModel.fromBackendType(song, playlistBackendType.id)),
-            location: playlistBackendType.location
+            id: playlistPostResponseType.id,
+            name: playlistPostResponseType.nombreLista,
+            description: playlistPostResponseType.descripcion,
+            songs: playlistPostResponseType.songs.map((song: SongBackendType) => SongModel.fromBackendType(song, playlistPostResponseType.id)),
+            location: playlistPostResponseType.location
         }
         return new PlaylistModel(playlist);
     }
 
-    toBakedPostType(): PlaylistBackendPostType {
+    toPostRequestType(): PlaylistPostRequestType {
         return {
             nombre: this.name,
             descripcion: this.description,
