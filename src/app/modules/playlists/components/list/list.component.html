@@ -15,8 +15,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let playlist of playlists$ | async ">
-      <td>{{playlist.name}}</td>
-      <td>{{playlist.description}}</td>
+      <td>{{playlist.name | truncate:20 }}</td>
+      <td>{{playlist.description | truncate:20}}</td>
       <td>
         <a (click)="editPlaylist(playlist)">Edit</a>
         <nz-divider nzType="vertical"></nz-divider>

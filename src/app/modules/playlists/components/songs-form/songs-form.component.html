@@ -70,11 +70,11 @@
   <tbody>
     <tr *ngFor="let song of songs; let index = index">
       <ng-container>
-        <td>{{ song.title }}</td>
-        <td>{{ song.artist }}</td>
-        <td>{{ song.album }}</td>
-        <td>{{ song.year }}</td>
-        <td>{{ song.genre }}</td>
+        <td>{{ song.title | truncate:20 }}</td>
+        <td>{{ song.artist | truncate:20 }}</td>
+        <td>{{ song.album | truncate:20 }}</td>
+        <td>{{ song.year | truncate:20 }}</td>
+        <td>{{ song.genre | truncate:20 }}</td>
         <td><a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteSong(song.id)">Delete</a></td>
       </ng-container>
     </tr>
