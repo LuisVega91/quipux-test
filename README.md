@@ -35,9 +35,8 @@ Se deben implementar los endpoint definidos en la anterior documentación en swa
     - [./src/app/modules/auth/components/sing-in/sing-in.component.html](./src/app/modules/auth/components/sing-in/sing-in.component.html)
     - [./src/app/modules/auth/auth.component.html](./src/app/modules/auth/auth.component.html)
     - [./src/app/modules/layout/layout.component.html](./src/app/modules/layout/layout.component.html)
-3. Debe tener una transformación de datos empleando alguno de los pipe con lo que
+3. Debe tener una transformación de datos empleando alguno de los pipe con lo que viene el framework o mejor aún si se crea uno.
     - [/src/app/core/pipes/truncate.pipe.ts](/src/app/core/pipes/truncate.pipe.ts)
-viene el framework o mejor aún si se crea uno.
 4. Debe tener un interceptor.
     - [./src/app/core/interceptors/error.interceptor.ts](./src/app/core/interceptors/error.interceptor.ts)
     - [./src/app/core/interceptors/json-web-token.interceptor.ts](./src/app/core/interceptors/json-web-token.interceptor.ts)
