@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
 import { SessionService } from '../services/session.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -19,14 +14,14 @@ export class AuthenticatedGuard {
     private router: Router
   ) {}
 
-  canActivate(): Observable<boolean> | boolean {
+  canActivate(): Observable<boolean> {
     return this.sessionService.gerCurrentSession().pipe(
       map((authToken) => {
-        if(authToken.isTokenExpiated){ return false}
+        if (authToken.isTokenExpiated) {return false;}
         return authToken.hasToken;
       }),
       tap((isAuthenticated) => {
-        if(!isAuthenticated){
+        if (!isAuthenticated) {
           this.message.warning('Please Sing In!');
           this.router.navigate(['/auth']);
         }

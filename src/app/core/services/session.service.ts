@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { LOCAL_STORAGE_SESSION_KEY } from '../constants/constansts';
+import { LOCAL_STORAGE_SESSION_KEY } from '../constants/constants';
 import { Router } from '@angular/router';
 import { AuthToken, AuthTokenModel } from '../models/AuthToken.model';
 
@@ -47,5 +47,4 @@ export class SessionService {
       JSON.stringify(newSession)
     )
   }
-
 }
