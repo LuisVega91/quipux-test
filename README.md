@@ -25,7 +25,7 @@ Se deben implementar los endpoint definidos en la anterior documentación en swa
     - [./src/app/modules/auth/components/sing-up/sing-up.component.ts](./src/app/modules/auth/components/sing-up/sing-up.component.ts)
     - [./src/app/modules/auth/components/sing-in/sing-in.component.ts](./src/app/modules/auth/components/sing-in/sing-in.component.ts)
     - [./src/app/modules/layout/layout.component.ts](./src/app/modules/layout/layout.component.ts)
-2. Debe tener una directiva.
+2. Debe tener una directiva. (Uso de directivas estructurales, de atributo y de componente en todos los templates de la aplicacion):
     - [./src/app/app.component.html](./src/app/app.component.html)
     - [./src/app/modules/playlists/components/form/form.component.html](./src/app/modules/playlists/components/form/form.component.html)
     - [./src/app/modules/playlists/components/songs-form/songs-form.component.html](./src/app/modules/playlists/components/songs-form/songs-form.component.html)
