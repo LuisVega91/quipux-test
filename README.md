@@ -1,5 +1,3 @@
-¡Por supuesto! Aquí te proporciono un modelo para que puedas crear un buen README para tu repositorio de Angular que resuelve la prueba técnica:
-
 # Lista de reproducción para un reproductor de música en la web
 
 Este repositorio contiene una solución para la prueba técnica frontend que consiste en desarrollar una lista de reproducción para un reproductor de música en la web utilizando Angular.
