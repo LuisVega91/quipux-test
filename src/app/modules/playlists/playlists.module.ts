@@ -18,6 +18,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { PipesModule } from 'src/app/core/pipes/pipes.module';
+import { DirectivesModule } from 'src/app/core/directives/directives.module';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { PipesModule } from 'src/app/core/pipes/pipes.module';
     NzPopconfirmModule,
     NzFormModule,
     NzInputModule,
-    PipesModule
+    PipesModule,
+    DirectivesModule
   ]
 })
 export class PlaylistsModule { }

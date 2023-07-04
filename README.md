@@ -25,16 +25,8 @@ Se deben implementar los endpoint definidos en la anterior documentación en swa
     - [./src/app/modules/auth/components/sing-up/sing-up.component.ts](./src/app/modules/auth/components/sing-up/sing-up.component.ts)
     - [./src/app/modules/auth/components/sing-in/sing-in.component.ts](./src/app/modules/auth/components/sing-in/sing-in.component.ts)
     - [./src/app/modules/layout/layout.component.ts](./src/app/modules/layout/layout.component.ts)
-2. Debe tener una directiva. (Uso de directivas estructurales, de atributo y de componente en todos los templates de la aplicacion):
-    - [./src/app/app.component.html](./src/app/app.component.html)
-    - [./src/app/modules/playlists/components/form/form.component.html](./src/app/modules/playlists/components/form/form.component.html)
-    - [./src/app/modules/playlists/components/songs-form/songs-form.component.html](./src/app/modules/playlists/components/songs-form/songs-form.component.html)
-    - [./src/app/modules/playlists/components/list/list.component.html](./src/app/modules/playlists/components/list/list.component.html)
-    - [./src/app/modules/playlists/playlists.component.html](./src/app/modules/playlists/playlists.component.html)
-    - [./src/app/modules/auth/components/sing-up/sing-up.component.html](./src/app/modules/auth/components/sing-up/sing-up.component.html)
-    - [./src/app/modules/auth/components/sing-in/sing-in.component.html](./src/app/modules/auth/components/sing-in/sing-in.component.html)
-    - [./src/app/modules/auth/auth.component.html](./src/app/modules/auth/auth.component.html)
-    - [./src/app/modules/layout/layout.component.html](./src/app/modules/layout/layout.component.html)
+2. Debe tener una directiva.
+    - [.src/app/core/directives/numeric-only.directive.ts](src/app/core/directives/numeric-only.directive.ts)
 3. Debe tener una transformación de datos empleando alguno de los pipe con lo que viene el framework o mejor aún si se crea uno.
     - [/src/app/core/pipes/truncate.pipe.ts](/src/app/core/pipes/truncate.pipe.ts)
 4. Debe tener un interceptor.
