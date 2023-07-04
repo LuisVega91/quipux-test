@@ -65,7 +65,7 @@ Para utilizar esta solución, sigue los siguientes pasos:
 5. Accede a `http://localhost:4200` en tu navegador para utilizar la lista de reproducción.
 6. Tambien puedes acceder directamente a la version desplegada en GitHubPages aqui https://luisvega91.github.io/quipux-test/auth
 
-<sub>__nota:__ el backend no tiene configurado los CORS para ser consumido por el dominio en el cual se encutra deplegado actualmente este rpoyecto, por lo tanto recomiendo usar el navegador chrome con la siguiente opcion 
+<sub>__nota:__ el backend no tiene configurado los CORS para ser consumido por el dominio en el cual se encutra deplegado actualmente este proyecto, por lo tanto recomiendo usar el navegador chrome con la siguiente opcion 
 
 mac:
 ```sh
