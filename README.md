@@ -59,11 +59,10 @@ Se deben implementar los endpoint definidos en la anterior documentación en swa
 Para utilizar esta solución, sigue los siguientes pasos:
 
 1. Clona este repositorio en tu máquina local.
-2. Configura el archivo `environment.ts` con las credenciales de autenticación proporcionadas por el cliente.
-3. Ejecuta el comando `npm install` en tu terminal para instalar las dependencias necesarias.
-4. Ejecuta el comando `ng serve` para iniciar el servidor y la aplicación web.
-5. Accede a `http://localhost:4200` en tu navegador para utilizar la lista de reproducción.
-6. Tambien puedes acceder directamente a la version desplegada en GitHubPages aqui https://luisvega91.github.io/quipux-test/auth
+2. Ejecuta el comando `npm install` en tu terminal para instalar las dependencias necesarias.
+3. Ejecuta el comando `ng serve` para iniciar el servidor y la aplicación web.
+4. Accede a `http://localhost:4200` en tu navegador para utilizar la lista de reproducción.
+5. Tambien puedes acceder directamente a la version desplegada en GitHubPages aqui https://luisvega91.github.io/quipux-test/auth
 
 <sub>__nota:__ el backend no tiene configurado los CORS para ser consumido por el dominio en el cual se encutra deplegado actualmente este proyecto, por lo tanto recomiendo usar el navegador chrome con la siguiente opcion 
 
@@ -75,7 +74,7 @@ mac:
 
 windows:
 ```cmd 
-    >  "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="c:/carpeta_temporal
+    >  chrome --disable-web-security --user-data-dir="c:/carpeta_temporal"
 ```
 
 </sub>
